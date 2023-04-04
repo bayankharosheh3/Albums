@@ -27,9 +27,15 @@ const MainView = () => {
         <Link to="/albums/1">Album</Link>
       </div>
       <div>
-        {data && data.map((item) => <div key={item.id}>
-          {item.title}
-          </div>)}
+        {data &&
+          data.map((item) => {
+            const id = item.id;
+            return (
+              <div key={item.id}>
+                <Link to={`/albums/${id}`}>{item.title}</Link>
+              </div>
+            );
+          })}
       </div>
     </>
   );

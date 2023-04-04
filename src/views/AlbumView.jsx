@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useFetch from "../components/useFetch";
 
 const AlbumView = () => {
+  const { id } = useParams();
   const { data, isLoading, error } = useFetch(
-    `https://jsonplaceholder.typicode.com/albums/1/photos`
+    `https://jsonplaceholder.typicode.com/albums/${id}/photos`
   );
 
   return (
@@ -17,6 +18,7 @@ const AlbumView = () => {
         <Link to="/albums/1">Album</Link>
         {/* {data.length} */}
       </div>
+      <div>item:{id}</div>
       {data &&
         data.map((item) => {
           return (
