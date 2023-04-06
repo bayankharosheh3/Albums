@@ -1,32 +1,41 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
-import axios from 'axios';
-
 
 const useFetch = (url) => {
-  console.log(url);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
+  const [hasMoreItems, setHasMoreItems] = useState(true);
+  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+
+  const fetchData = () => {
+    setIsLoading(true);
+
+    setTimeout(() => {
+      axios
+        .get(`${url}?_page=${page}&_limit=10`)
+        .then((response) => {
+          const newData = response.data;
+          if (newData.length === 0) {
+            setHasMoreItems(false);
+          } else {
+            setData([...data, ...newData]);
+            setPage(page + 1);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }, 2000);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-
-      try {
-        const response = await axios.get(url);
-        setData(response.data);
-      } catch (error) {
-        setError(error);
-      }
-
-      setIsLoading(false);
-    };
-
     fetchData();
-  }, [url]);
+  }, []);
 
-  // console.log(data);
-  return { data, isLoading, error };
+  return { data, hasMoreItems, isLoading, fetchData };
 };
 
 export default useFetch;

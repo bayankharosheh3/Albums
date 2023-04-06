@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import InfiniteScroll from "react-infinite-scroller";
 import useFetch from "../components/useFetch";
 
 const AlbumView = () => {
   const { id } = useParams();
-  const { data, isLoading, error } = useFetch(
-    `https://jsonplaceholder.typicode.com/albums/${id}/photos`
-  );
+  const {
+    data: photos,
+    hasMoreItems,
+    isLoading,
+    fetchData,
+  } = useFetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos`);
 
   return (
     <>
@@ -16,18 +20,28 @@ const AlbumView = () => {
       </div>
       <div>
         <Link to="/albums/1">Album</Link>
-        {/* {data.length} */}
       </div>
       <div>item:{id}</div>
-      {data &&
-        data.map((item) => {
-          return (
-            <div>
-              <div key={item.id}>{item.title}</div>;
-              <img src={item.url} alt="" srcset="" />
+      <div>
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={fetchData}
+          hasMore={hasMoreItems}
+          loader={
+            <div className="loader" key={0}>
+              Loading ...
             </div>
-          );
-        })}
+          }
+        >
+          {photos.map((photo) => (
+            <div key={photo.id}>
+              <h2>{photo.title}</h2>
+              <img src={photo.thumbnailUrl} alt={photo.title} />
+            </div>
+          ))}
+          {isLoading && <div className="loader">Loading ...</div>}
+        </InfiniteScroll>
+      </div>
     </>
   );
 };
