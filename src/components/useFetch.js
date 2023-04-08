@@ -12,7 +12,7 @@ const useFetch = (url) => {
 
     setTimeout(() => {
       axios
-        .get(`${url}?_page=${page}&_limit=10`)
+        .get(`${url}?_page=${page}&_limit=20`)
         .then((response) => {
           const newData = response.data;
           if (newData.length === 0) {
@@ -28,7 +28,7 @@ const useFetch = (url) => {
         .finally(() => {
           setIsLoading(false);
         });
-    }, 2000);
+    });
   };
 
   useEffect(() => {

@@ -1,0 +1,19 @@
+.title {
+    color: white;
+    font-size: 170px;
+    font-weight: 400;
+    padding-top: 3%;
+    padding: 3% 0px 0px 2%;
+}
+
+.imgSection{
+    display: grid;
+    grid-template-columns: repeat(7,8%);
+    gap:10px;
+    justify-content: end;
+    padding: 0px 5%;
+}
+
+.imgSection img{
+    width: 100%;
+}
