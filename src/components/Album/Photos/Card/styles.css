@@ -1,0 +1,22 @@
+.cardContainer {
+  display: flex;
+  margin-top: 20px;
+}
+
+.cardImg img {
+  width: 120px;
+}
+
+.id {
+  display: block;
+  color: white;
+  padding: 17px;
+  font-size: 20px;
+}
+
+.cardTitle {
+  color: white;
+}
+.desc {
+  color: white;
+}

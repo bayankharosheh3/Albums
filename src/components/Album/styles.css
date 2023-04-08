@@ -1,0 +1,24 @@
+.albumContainer {
+  padding-top: 8%;
+  width: 80%;
+  margin: auto;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  border-bottom: #ccc 1px solid;
+  padding-bottom: 10px;
+}
+
+.albumTitle {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.mainLink {
+  text-decoration: none;
+  color: rgb(64, 209, 238);
+}

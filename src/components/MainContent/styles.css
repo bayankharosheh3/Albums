@@ -2,11 +2,3 @@
   background-color: rgb(0, 0, 0, 0.8);
   min-height: 100vh;
 }
-
-
-
-@media (max-width: 1200px) {
-  .container {
-    background-position-y: 0px;
-  }
-}

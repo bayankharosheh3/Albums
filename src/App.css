@@ -1,4 +1,4 @@
-*{
+* {
   padding: 0;
   margin: 0;
 }
@@ -10,5 +10,10 @@ body {
   background-position-y: -220px;
   min-height: 100vh;
   width: 100%;
-} 
+}
 
+@media (max-width: 1200px) {
+  body {
+    background-position-y: 0px;
+  }
+}

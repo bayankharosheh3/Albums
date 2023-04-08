@@ -1,10 +1,10 @@
 import React from "react";
 import "./styles.css";
-import useFetch from "../useFetch";
+import useFetch from "../../useFetch";
 import InfiniteScroll from "react-infinite-scroller";
 import { Link } from "react-router-dom";
 
-const AlbumsList = () => {
+const AlbumsSection = () => {
   const {
     data: albums,
     hasMoreItems,
@@ -53,4 +53,4 @@ const AlbumsList = () => {
   );
 };
 
-export default AlbumsList;
+export default AlbumsSection;

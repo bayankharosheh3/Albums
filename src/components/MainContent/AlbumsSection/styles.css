@@ -7,10 +7,12 @@
   color: white;
   display: flex;
 }
-.text{
-    font-size: 18px;
-    padding: 0px 10px;
+
+.text {
+  font-size: 18px;
+  padding: 0px 10px;
 }
+
 .gridContainer {
   display: grid;
   grid-template-columns: 33% 33% 33%;
@@ -20,11 +22,10 @@
 }
 
 .gridItem {
-  border-top: .3px #aaa solid;
+  border-top: 0.3px #aaa solid;
   padding: 10px 10px;
   display: flex;
   align-items: center;
-
 }
 
 .itemNum {
@@ -37,12 +38,11 @@
   text-decoration: none;
   color: white;
   width: 70%;
-  border: .5px solid transparent;
+  border: 0.5px solid transparent;
   padding: 7px 20px;
-
 }
 
 .itemLink:hover {
-  border: .5px solid #aaa;
+  border: 0.5px solid #aaa;
   border-radius: 5%;
 }
