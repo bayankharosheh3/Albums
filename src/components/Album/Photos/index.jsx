@@ -25,7 +25,7 @@ const Photos = ({ id }) => {
     >
       <div className="photoContainer">
         {photos.map((photo) => (
-          <Card id={photo.id} url={photo.thumbnailUrl} title={photo.title} />
+          <Card id={photo.id} url={photo.thumbnailUrl} title={photo.title} key={photo.id}/>
         ))}
       </div>
     </InfiniteScroll>
