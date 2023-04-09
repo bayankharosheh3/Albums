@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const useFetch = (url) => {
+const useFetch = (url,p) => {
   const [data, setData] = useState([]);
   const [hasMoreItems, setHasMoreItems] = useState(true);
   const [page, setPage] = useState(1);
@@ -18,19 +18,25 @@ const useFetch = (url) => {
           const newData = response.data;
           console.log(newData);
           if (newData.length === 0) {
-            setHasMoreItems(false);
+            if (page === 1 && p=='a') {
+              navigate("/not-found");
+            } else {
+              setHasMoreItems(false);
+            }
           } else {
             setData([...data, ...newData]);
             setPage(page + 1);
           }
         })
         .catch((error) => {
-          console.log(error);
+          if (error.response && error.response.status === 404) {
+            // navigate("/not-found");
+          }
         })
         .finally(() => {
           setIsLoading(false);
         });
-    }, 0);
+    });
   };
 
   useEffect(() => {
@@ -40,10 +46,8 @@ const useFetch = (url) => {
   }, [url]);
 
   useEffect(() => {
-    if (url.trim() !== "") {
-      fetchData();
-    }
-  }, [url, page]);
+    fetchData()
+  }, [url,page]);
 
   return { data, hasMoreItems, isLoading, fetchData };
 };

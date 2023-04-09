@@ -10,7 +10,7 @@ const Photos = ({ id }) => {
     hasMoreItems,
     isLoading,
     fetchData,
-  } = useFetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos?`);
+  } = useFetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos?`,'a');
 
   return (
     <InfiniteScroll
