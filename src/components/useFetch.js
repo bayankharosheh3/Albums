@@ -9,7 +9,6 @@ const useFetch = (url) => {
 
   const fetchData = () => {
     setIsLoading(true);
-
     setTimeout(() => {
       axios
         .get(`${url}?_page=${page}&_limit=20`)
