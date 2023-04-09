@@ -1,23 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.css";
 import useFetch from "../../useFetch";
 import InfiniteScroll from "react-infinite-scroller";
 import { Link } from "react-router-dom";
 
 const AlbumsSection = () => {
+  const [searchTerm, setSearchTerm] = useState("");
   const {
     data: albums,
     hasMoreItems,
     isLoading,
     fetchData,
-  } = useFetch("https://jsonplaceholder.typicode.com/albums");
+  } = useFetch(`https://jsonplaceholder.typicode.com/albums?q=${searchTerm}&`);
 
   return (
     <div>
       <div className="listContainer">
         <div className="listTitle">
           <p className="text">/ albums search</p>
-          <input type="text" name="" id="" />
+          <input
+            type="text"
+            name=""
+            id=""
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
+          {console.log(searchTerm)}
         </div>
         <div className="albumsList">
           <div className="listItem">

@@ -10,7 +10,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<MainView />}></Route>
         <Route path="/albums/:id" element={<AlbumView />}></Route>
-        <Route path="*" element={<NotFoundView />} />
+        <Route path="/albums/*" element={<NotFoundView />} />
       </Routes>
     </BrowserRouter>
   );

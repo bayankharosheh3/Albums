@@ -11,7 +11,7 @@ const useFetch = (url) => {
     setIsLoading(true);
     setTimeout(() => {
       axios
-        .get(`${url}?_page=${page}&_limit=20`)
+        .get(`${url}_page=${page}&_limit=15`)
         .then((response) => {
           const newData = response.data;
           if (newData.length === 0) {
@@ -27,12 +27,20 @@ const useFetch = (url) => {
         .finally(() => {
           setIsLoading(false);
         });
-    });
+    },0);
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    setData([]);
+    setHasMoreItems(true);
+    setPage(1);
+  }, [url]);
+
+  useEffect(() => {
+    if (url.trim() !== '') {
+      fetchData();
+    }
+  }, [url, page]);
 
   return { data, hasMoreItems, isLoading, fetchData };
 };

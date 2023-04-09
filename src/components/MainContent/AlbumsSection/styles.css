@@ -46,3 +46,33 @@
   border: 0.5px solid #aaa;
   border-radius: 5%;
 }
+
+@media (max-width:992px){
+  .gridContainer {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 10px;
+    margin-top: 20px;
+    /* gap: 20px; */
+  }
+  
+}
+
+@media (max-width:576px){
+  .gridContainer {
+    grid-template-columns: 100% ;
+    padding: 5px;
+    margin-top: 15px;
+  }
+  .text{
+ font-size: 16px;
+  }
+  .gridItem {
+    padding: 5px 10px;
+  }
+  
+  .link{
+    font-size: 14px;
+
+  }
+}
