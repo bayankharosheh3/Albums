@@ -18,14 +18,10 @@ const useFetch = (url) => {
           const newData = response.data;
           console.log(newData);
           if (newData.length === 0) {
-            navigate("/404");
+            setHasMoreItems(false);
           } else {
-            if (newData.length === 0) {
-              setHasMoreItems(false);
-            } else {
-              setData([...data, ...newData]);
-              setPage(page + 1);
-            }
+            setData([...data, ...newData]);
+            setPage(page + 1);
           }
         })
         .catch((error) => {
