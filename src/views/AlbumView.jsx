@@ -4,7 +4,12 @@ import Album from "../components/Album";
 
 const AlbumView = () => {
   const { id } = useParams();
-  return <Album id={id} />;
+  
+  return (
+    <div className="container">
+      <Album id={id} />
+    </div>
+  );
 };
 
 export default AlbumView;
