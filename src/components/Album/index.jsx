@@ -1,19 +1,14 @@
 import React from "react";
 import "./styles.css";
-import { Link } from "react-router-dom";
 import Photos from "./Photos";
+import Navbar from "./Navbar";
 
 const Album = ({ id }) => {
   return (
     <div className="overlay">
       <div className="albumContainer">
-        <div className="nav">
-          <div className="albumTitle">Album #{id} Photos</div>
-          <Link to="/" className="mainLink">
-            -- Back to Main Page
-          </Link>
-        </div>
-        <Photos id={id}/>
+        <Navbar id={id} />
+        <Photos id={id} />
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ const Photos = ({ id }) => {
     isLoading,
     fetchData,
   } = useFetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos`);
+
   return (
     <InfiniteScroll
       pageStart={0}
@@ -27,8 +28,6 @@ const Photos = ({ id }) => {
           <Card id={photo.id} url={photo.thumbnailUrl} title={photo.title} />
         ))}
       </div>
-
-      {isLoading && <div className="loader">Loading ...</div>}
     </InfiniteScroll>
   );
 };
