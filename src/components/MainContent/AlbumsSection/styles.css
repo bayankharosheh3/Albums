@@ -47,6 +47,10 @@
   border-radius: 5%;
 }
 
+.loader{
+  color: white;
+}
+
 @media (max-width:992px){
   .gridContainer {
     display: grid;

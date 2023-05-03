@@ -3,12 +3,12 @@ import "./styles.css";
 import Photos from "./Photos";
 import Navbar from "./Navbar";
 
-const Album = ({ id }) => {
+const Album = ({ albumId }) => {
   return (
     <div className="overlay">
       <div className="albumContainer">
-        <Navbar id={id} />
-        <Photos id={id} />
+        <Navbar albumId={albumId} />
+        <Photos albumId={albumId} />
       </div>
     </div>
   );

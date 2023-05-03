@@ -7,7 +7,7 @@ const AlbumView = () => {
   
   return (
     <div className="container">
-      <Album id={id} />
+      <Album albumId={id} />
     </div>
   );
 };

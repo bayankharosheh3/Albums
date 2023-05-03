@@ -3,9 +3,11 @@ import "./styles.css";
 import useFetch from "../../useFetch";
 import InfiniteScroll from "react-infinite-scroller";
 import { Link } from "react-router-dom";
+import SearchBar from "../../SearchBar";
 
 const AlbumsSection = () => {
   const [searchTerm, setSearchTerm] = useState("");
+
   const {
     data: albums,
     hasMoreItems,
@@ -16,17 +18,7 @@ const AlbumsSection = () => {
   return (
     <div>
       <div className="listContainer">
-        <div className="listTitle">
-          <p className="text">/ albums search</p>
-          <input
-            type="text"
-            name=""
-            id=""
-            value={searchTerm}
-            onChange={(event) => setSearchTerm(event.target.value)}
-          />
-          {console.log(searchTerm)}
-        </div>
+        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
         <div className="albumsList">
           <div className="listItem">
             <InfiniteScroll
@@ -52,7 +44,6 @@ const AlbumsSection = () => {
                   );
                 })}
               </div>
-              {isLoading && <div className="loader">Loading ...</div>}
             </InfiniteScroll>
           </div>
         </div>

@@ -4,13 +4,13 @@ import InfiniteScroll from "react-infinite-scroller";
 import Card from "./Card";
 import "./styles.css";
 
-const Photos = ({ id }) => {
+const Photos = ({ albumId }) => {
   const {
     data: photos,
     hasMoreItems,
     isLoading,
     fetchData,
-  } = useFetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos?`,'a');
+  } = useFetch(`  https://jsonplaceholder.typicode.com/albums/${albumId}/photos?q=&`,'a');
 
   return (
     <InfiniteScroll
