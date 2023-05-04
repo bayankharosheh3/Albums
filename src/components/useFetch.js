@@ -52,18 +52,18 @@ const useFetch = (url, p) => {
   };
 
   useEffect(() => {
-    setData([...[]]);
+    setData([]);
     setHasMoreItems(true);
     setPage(1);
   }, [url]);
 
   useEffect(() => {
-    setData([]);
-    setHasMoreItems(true);
-    setPage(1);
     fetchData();
     scrollRef.current = window;
     window.addEventListener('scroll', infiniteScroll);
+    return () => {
+      window.removeEventListener("scroll", infiniteScroll);
+    };
   }, []);
 
   return { data, hasMoreItems, isLoading, fetchData };

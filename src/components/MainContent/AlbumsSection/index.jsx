@@ -4,16 +4,19 @@ import useFetch from "../../useFetch";
 import InfiniteScroll from "react-infinite-scroller";
 import { Link } from "react-router-dom";
 import SearchBar from "../../SearchBar";
+import useSearch from "../../useSearch";
 
 const AlbumsSection = () => {
   const [searchTerm, setSearchTerm] = useState("");
+
+  const debouncedSearchTerm = useSearch(searchTerm, 500);
 
   const {
     data: albums,
     hasMoreItems,
     isLoading,
     fetchData,
-  } = useFetch(`https://jsonplaceholder.typicode.com/albums?q=${searchTerm}&`);
+  } = useFetch(`https://jsonplaceholder.typicode.com/albums?q=${debouncedSearchTerm}&`);
 
   return (
     <div>
