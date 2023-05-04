@@ -17,7 +17,6 @@ const useFetch = (url, p) => {
         .get(`${url}_page=${page}&_limit=20`)
         .then((response) => {
           const newData = response.data;
-          console.log(newData);
           if (newData.length === 0) {
             if (page === 1 && p === "a") {
               navigate("/not-found");
