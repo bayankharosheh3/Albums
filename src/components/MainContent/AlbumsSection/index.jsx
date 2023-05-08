@@ -16,16 +16,12 @@ const AlbumsSection = () => {
     hasMoreItems,
     isLoading,
     fetchData,
-  } = useFetch(
-    `https://jsonplaceholder.typicode.com/albums?q=${debouncedSearchTerm}&`
-  );
-
-  console.log(albums);
+  } = useFetch(`https://jsonplaceholder.typicode.com/albums?q=${debouncedSearchTerm}&`);
 
   return (
     <div>
       <div className="listContainer">
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
         <div className="albumsList">
           <div className="listItem">
             <InfiniteScroll
@@ -39,20 +35,17 @@ const AlbumsSection = () => {
               }
             >
               <div className="gridContainer">
-                {albums &&
-                  albums.map((page) =>
-                    page.data.map((album) => {
-                      const id = album.id;
-                      return (
-                        <div key={album.id} className="gridItem">
-                          <span className="itemNum">{album.id}</span>
-                          <Link className="itemLink" to={`/albums/${id}`}>
-                            <span className="link">{album.title}</span>
-                          </Link>
-                        </div>
-                      );
-                    })
-                  )}
+                {albums.map((album) => {
+                  const id = album.id;
+                  return (
+                    <div key={album.id} className="gridItem">
+                      <span className="itemNum">{album.id}</span>
+                      <Link className="itemLink" to={`/albums/${id}`}>
+                        <span className="link">{album.title}</span>
+                      </Link>
+                    </div>
+                  );
+                })}
               </div>
             </InfiniteScroll>
           </div>
@@ -61,5 +54,4 @@ const AlbumsSection = () => {
     </div>
   );
 };
-
 export default AlbumsSection;

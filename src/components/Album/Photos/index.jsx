@@ -4,18 +4,13 @@ import InfiniteScroll from "react-infinite-scroller";
 import Card from "./Card";
 import "./styles.css";
 
-const Photos = ({ albumId, debouncedSearchTerm }) => {
+const Photos = ({ albumId,debouncedSearchTerm }) => {
   const {
     data: photos,
     hasMoreItems,
     isLoading,
     fetchData,
-  } = useFetch(
-    `  https://jsonplaceholder.typicode.com/albums/${albumId}/photos?q=${debouncedSearchTerm}&`,
-    "a"
-  );
-
-  console.log(photos);
+  } = useFetch(`  https://jsonplaceholder.typicode.com/albums/${albumId}/photos?q=${debouncedSearchTerm}&`,'a');
 
   return (
     <InfiniteScroll
@@ -29,19 +24,11 @@ const Photos = ({ albumId, debouncedSearchTerm }) => {
       }
     >
       <div className="photoContainer">
-        {photos.map((page) =>
-          page.data.map((photo) => (
-            <Card
-              id={photo.id}
-              url={photo.thumbnailUrl}
-              title={photo.title}
-              key={photo.id}
-            />
-          ))
-        )}
+        {photos.map((photo) => (
+          <Card id={photo.id} url={photo.thumbnailUrl} title={photo.title} key={photo.id}/>
+        ))}
       </div>
     </InfiniteScroll>
   );
 };
-
 export default Photos;
