@@ -5,7 +5,7 @@ const Card = ({url,id,title}) => {
   return (
     <div className='cardContainer'>
         <div className="cardImg">
-            <img src={url} alt="" srcset="" />
+            <img src={url} alt=""/>
         </div>
         <div className="cardId">
             <span className='id'>{id}</span>

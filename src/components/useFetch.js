@@ -1,71 +1,53 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useInfiniteQuery } from "react-query";
 
 const useFetch = (url, p) => {
-  const [data, setData] = useState([]);
-  const [hasMoreItems, setHasMoreItems] = useState(true);
-  const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const scrollRef = useRef(null);
 
-  const fetchData = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      axios
-        .get(`${url}_page=${page}&_limit=20`)
-        .then((response) => {
-          const newData = response.data;
-          if (newData.length === 0) {
-            if (page === 1 && p === "a") {
-              navigate("/not-found");
-            } else {
-              setHasMoreItems(false);
-            }
-          } else {
-            setData([...data, ...newData]);
-            setPage(page + 1);
-          }
-        })
-        .catch((error) => {
-          if (error.response && error.response.status === 404) {
-            navigate("/not-found");
-          }
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    });
-  };
+  const fetchPosts = async ({ pageParam = 1 }) => {
+    const response = await axios.get(`${url}_page=${pageParam}&_limit=20`);
 
-  const infiniteScroll = () => {
-    if (
-      scrollRef.current &&
-      scrollRef.current.scrollTop + scrollRef.current.clientHeight >=
-        scrollRef.current.scrollHeight
-    ) {
-      setPage(page + 1);
-      fetchData();
+    if (response.data.length === 0) {
+      if (pageParam === 1 && p === "a") {
+        throw new Error("No posts found");
+      } else {
+        return {
+          data: [],
+          nextPage: null,
+        };
+      }
     }
+
+    return {
+      data: response.data,
+      nextPage: pageParam + 1,
+    };
   };
 
-  useEffect(() => {
-    setData([]);
-    setHasMoreItems(true);
-    setPage(1);
-  }, [url]);
+  const {
+    data,
+    isLoading,
+    isError,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery(["posts", url], fetchPosts, {
+    getNextPageParam: (lastPage) => lastPage.nextPage,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
+
+  const allPosts = data ? data.pages.flatMap((page) => page) : [];
 
   useEffect(() => {
-    fetchData();
-    scrollRef.current = window;
-    window.addEventListener('scroll', infiniteScroll);
-    return () => {
-      window.removeEventListener("scroll", infiniteScroll);
-    };
-  }, []);
+    if (isError) {
+      navigate("/not-found");
+    }
+  }, [isError, navigate]);
 
-  return { data, hasMoreItems, isLoading, fetchData };
+  return { data: allPosts, isLoading, hasMoreItems:hasNextPage, fetchData:fetchNextPage, isFetchingNextPage };
 };
 
 export default useFetch;
