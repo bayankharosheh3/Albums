@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css";
 import useFetch from "../../useFetch";
 import InfiniteScroll from "react-infinite-scroller";
 import { Link } from "react-router-dom";
 import SearchBar from "../../SearchBar";
 import useSearch from "../../useSearch";
+import { useDispatch } from "react-redux";
+import { addSearchHistory } from "../../../redux/searchHistorySlice";
 
 const AlbumsSection = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const debouncedSearchTerm = useSearch(searchTerm, 500);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if(debouncedSearchTerm !== "")
+    dispatch(addSearchHistory(debouncedSearchTerm));
+  }, [debouncedSearchTerm])
 
   const {
     data: albums,

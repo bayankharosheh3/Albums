@@ -1,6 +1,17 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import SearchHistory from "./SearchHistory";
+import "./styles.css";
+
 
 const SearchBar = ({ searchTerm, setSearchTerm }) => {
+  const searchHistory = useSelector((state) => state.searchHistory);
+
+  const handleSearchTermChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+
   return (
     <>
       <div className="listTitle">
@@ -10,8 +21,10 @@ const SearchBar = ({ searchTerm, setSearchTerm }) => {
           name=""
           id=""
           value={searchTerm}
-          onChange={(event) => setSearchTerm(event.target.value)}
+          className="input"
+          onChange={handleSearchTermChange}
         />
+        <SearchHistory searchHistory={searchHistory} />
       </div>
     </>
   );

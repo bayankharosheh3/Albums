@@ -28,7 +28,7 @@ const useFetch = (url, p) => {
         })
         .catch((error) => {
           if (error.response && error.response.status === 404) {
-            navigate("/not-found");
+            // navigate("/not-found");
           }
         })
         .finally(() => {

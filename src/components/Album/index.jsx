@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css";
 import Photos from "./Photos";
 import Navbar from "./Navbar";
 import useSearch from "../useSearch";
+import { useDispatch } from "react-redux";
+import { addSearchHistory } from "./../../redux/searchHistorySlice";
 
 const Album = ({ albumId }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useSearch(searchTerm, 500);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if(debouncedSearchTerm !== "")
+    dispatch(addSearchHistory(debouncedSearchTerm));
+  }, [debouncedSearchTerm])
 
   return (
     <div className="overlay">
