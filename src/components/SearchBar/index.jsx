@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import SearchHistory from "./SearchHistory";
 import "./styles.css";
 
-
 const SearchBar = ({ searchTerm, setSearchTerm }) => {
   const searchHistory = useSelector((state) => state.searchHistory);
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
   const handleSearchTermChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
+  const handleInputFocus = () => {
+    setIsInputFocused(true);
+  };
+
+  const handleInputBlur = () => {
+    setIsInputFocused(false);
+  };
 
   return (
     <>
@@ -23,8 +30,10 @@ const SearchBar = ({ searchTerm, setSearchTerm }) => {
           value={searchTerm}
           className="input"
           onChange={handleSearchTermChange}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
         />
-        <SearchHistory searchHistory={searchHistory} />
+        {isInputFocused && <SearchHistory searchHistory={searchHistory} />}
       </div>
     </>
   );
