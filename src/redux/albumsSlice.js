@@ -19,6 +19,7 @@ const albumsSlice = createSlice({
     resetData(state) {
       state.data = [];
       state.cachingTime = null;
+      state.lastPageCached = 1;
     },
   },
 });

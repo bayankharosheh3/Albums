@@ -3,7 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchDataSuccess, resetData } from "../redux/albumsSlice";
 import { useDispatch, useSelector } from "react-redux";
-const useFetch = (url, debouncedSearchTerm, p) => {
+
+const useFetch = (url, p) => {
   const [data, setData] = useState([]);
   const [hasMoreItems, setHasMoreItems] = useState(true);
   const [page, setPage] = useState(1);
@@ -21,7 +22,6 @@ const useFetch = (url, debouncedSearchTerm, p) => {
 
   console.log(reduxPage, page);
 
-
   const fetchData = () => {
     console.log("entered");
 
@@ -30,13 +30,9 @@ const useFetch = (url, debouncedSearchTerm, p) => {
       return;
     }
 
+    
     var data2;
     var page2 = page + 1;
-    console.log("enteredok", url);
-
-    // if( page <= reduxPage - 1){
-    //   return;
-    // }
 
     setIsLoading(true);
     setTimeout(() => {
@@ -53,10 +49,18 @@ const useFetch = (url, debouncedSearchTerm, p) => {
           } else {
             setData([...data, ...newData]);
             setPage(page + 1);
-            data2 = [...reduxData, ...newData];
-            page2 = page + 1;
-            console.log(url);
-            dispatch(fetchDataSuccess({ data2, cachingTime, page2, url }));
+            if (url != reduxUrl) {
+              data2 = [...newData];
+              page2 = page + 1;
+              console.log(url);
+              setPage(1);
+              dispatch(fetchDataSuccess({ data2, cachingTime, page2, url }));
+            } else {
+              data2 = [...reduxData, ...newData];
+              page2 = page + 1;
+              console.log(url);
+              dispatch(fetchDataSuccess({ data2, cachingTime, page2, url }));
+            }
           }
         })
         .catch((error) => {
@@ -69,16 +73,7 @@ const useFetch = (url, debouncedSearchTerm, p) => {
         });
     });
   };
-  const infiniteScroll = () => {
-    if (
-      scrollRef.current &&
-      scrollRef.current.scrollTop + scrollRef.current.clientHeight >=
-        scrollRef.current.scrollHeight
-    ) {
-      setPage(page + 1);
-      fetchData();
-    }
-  };
+
   useEffect(() => {
     setData([]);
     setHasMoreItems(true);
@@ -86,8 +81,10 @@ const useFetch = (url, debouncedSearchTerm, p) => {
   }, [url]);
 
   useEffect(() => {
+    setPage(1);
     fetchData();
   }, [url]);
+
   return { data, hasMoreItems, isLoading, fetchData };
 };
 export default useFetch;
