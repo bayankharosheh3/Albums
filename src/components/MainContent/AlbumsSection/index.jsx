@@ -5,7 +5,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import { Link } from "react-router-dom";
 import SearchBar from "../../SearchBar";
 import useSearch from "../../useSearch";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { addSearchHistory } from "../../../redux/searchHistorySlice";
 
 const AlbumsSection = () => {
@@ -25,7 +25,15 @@ const AlbumsSection = () => {
     hasMoreItems,
     isLoading,
     fetchData,
-  } = useFetch(`https://jsonplaceholder.typicode.com/albums?q=${debouncedSearchTerm}&`);
+  } = useFetch(`https://jsonplaceholder.typicode.com/albums?q=${debouncedSearchTerm}&`,debouncedSearchTerm);
+
+  const data = useSelector(state => state.albums.data)
+  const page = useSelector(state => state.albums.lastPageCached)
+  const url = useSelector(state => state.albums.url)
+
+  console.log(data,page,url)
+
+
 
   return (
     <div>
@@ -44,7 +52,7 @@ const AlbumsSection = () => {
               }
             >
               <div className="gridContainer">
-                {albums.map((album) => {
+                {data?.map((album) => {
                   const id = album.id;
                   return (
                     <div key={album.id} className="gridItem">

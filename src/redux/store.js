@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import searchHistoryReducer from "./searchHistorySlice";
-import apiReducer from './apiSlice'
+import albumsReducer from './albumsSlice'
 
 const store = configureStore({
   reducer: {
     searchHistory: searchHistoryReducer,
-    api : apiReducer
+    albums : albumsReducer
   },
 });
 
