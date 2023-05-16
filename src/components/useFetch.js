@@ -9,8 +9,6 @@ const useFetch = (url, p) => {
   const [hasMoreItems, setHasMoreItems] = useState(true);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
-  const scrollRef = useRef(null);
 
   const cachingTime = new Date().getTime();
   const dispatch = useDispatch();
@@ -20,17 +18,24 @@ const useFetch = (url, p) => {
   const reduxUrl = useSelector((state) => state.albums.url);
   const reduxTime = useSelector((state) => state.albums.cachingTime);
 
-  console.log(reduxPage, page);
-
   const fetchData = () => {
-    console.log("entered");
-
-    if (url == reduxUrl && page <= reduxPage - 1) {
+    if (
+      url == reduxUrl &&
+      page <= reduxPage - 1 &&
+      (cachingTime - reduxTime) / 1000 < 60
+    ) {
       setPage(page + 1);
       return;
     }
 
-    
+    if (
+      url == reduxUrl &&
+      page <= reduxPage - 1 &&
+      (cachingTime - reduxTime) / 1000 >= 60
+    ) {
+      dispatch(resetData());
+    }
+
     var data2;
     var page2 = page + 1;
 
@@ -41,11 +46,7 @@ const useFetch = (url, p) => {
         .then((response) => {
           const newData = response.data;
           if (newData.length === 0) {
-            if (page === 1 && p === "a") {
-              navigate("/not-found");
-            } else {
-              setHasMoreItems(false);
-            }
+            setHasMoreItems(false);
           } else {
             setData([...data, ...newData]);
             setPage(page + 1);
