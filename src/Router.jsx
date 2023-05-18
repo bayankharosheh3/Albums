@@ -8,7 +8,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/albums" index element={<MainView />}></Route>
+        <Route path="/Albums/" index element={<MainView />}></Route>
         <Route path="/albums/:id" element={<AlbumView />}></Route>
         <Route path="*" element={<NotFoundView />}/>
       </Routes>
