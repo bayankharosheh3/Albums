@@ -61,7 +61,7 @@ const AlbumsSection = () => {
                   return (
                     <div key={album.id} className="gridItem">
                       <span className="itemNum">{album.id}</span>
-                      <Link className="itemLink" to={`/albums/${id}`}>
+                      <Link className="itemLink" to={`/Albums/${id}`}>
                         <span className="link">{album.title}</span>
                       </Link>
                     </div>

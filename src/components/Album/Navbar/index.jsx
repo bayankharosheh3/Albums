@@ -8,7 +8,7 @@ const Navbar = ({ albumId, searchTerm, setSearchTerm }) => {
     <div className="nav">
       <div className="albumTitle">Album #{albumId} Photos</div>
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <Link to="/" className="mainLink">
+      <Link to="/Albums" className="mainLink">
         -- Back to Main Page
       </Link>
     </div>
