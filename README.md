@@ -12,7 +12,7 @@ https://bayankharosheh3.github.io/Albums/
 #### Consumes the JSONPlaceholder Albums API (https://jsonplaceholder.typicode.com/albums).
 
 #### Consists of three pages: 
-###### - Main page with infinite scrolling functionality, Search bar for filtering albums by title ,Ability to redirect to individual album pages (/albums/{albumId}).
+###### - Main page with infinite scrolling functionality, Search bar for filtering albums by title, Ability to redirect to individual album pages (/albums/{albumId}).
 ###### - Album page that displays all album images using infinite scrolling.
 
 ###### - 404 page for non-existing album IDs.
@@ -32,7 +32,5 @@ https://bayankharosheh3.github.io/Albums/
 #### Creation of responsive React applications.
 
 #### Integration of caching of fetched data using Redux Toolkit.
-
-#### Efficient retrieval of previously fetched album data, reducing the need for repeated API calls.
 
 #### Implementation of search history functionality using Redux Toolkit.
