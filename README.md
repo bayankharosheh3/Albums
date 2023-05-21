@@ -12,11 +12,10 @@ https://bayankharosheh3.github.io/Albums/
 ##### Consumes the JSONPlaceholder Albums API (https://jsonplaceholder.typicode.com/albums).
 
 ##### Consists of three pages: 
-1- Main page with infinite scrolling functionality, Search bar for filtering albums by title ,Ability to redirect to individual album pages (/albums/{albumId}).
+###### 1- Main page with infinite scrolling functionality, Search bar for filtering albums by title ,Ability to redirect to individual album pages (/albums/{albumId}).
+###### 2- Album page that displays all album images using infinite scrolling.
 
-2- Album page that displays all album images using infinite scrolling.
-
-3- 404 page for non-existing album IDs.
+###### 3- 404 page for non-existing album IDs.
 
 Full responsiveness across various devices.
 
